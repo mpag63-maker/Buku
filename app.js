@@ -24,7 +24,11 @@
       namePh: "Tulis nama kamu", certFor: "Sijil ini untuk", starsGot: "Bintang dikumpul", print: "🖨️ Cetak Sijil",
       again: "↺ Baca semula", reset: "Padam kemajuan", resetQ: "Padam semua bintang dan mula semula?",
       endNote: "Ingat: sentiasa berselawat ke atas Nabi Muhammad ﷺ dan beriman kepada semua rasul. 💚",
-      as: "a.s.", missing: "📷 QR belum dimuat naik."
+      as: "a.s.", missing: "📷 QR belum dimuat naik.",
+      install: "📲 Pasang Aplikasi", installTitle: "Pasang di skrin utama",
+      installed: "Aplikasi berjaya dipasang! 🎉", offline: "Sedia dibaca tanpa internet ✅",
+      iosSteps: ["Buka laman ini dalam <b>Safari</b>.", "Ketuk butang <b>Kongsi</b> <span aria-hidden=\"true\">⬆️</span> di bawah atau di atas skrin.", "Pilih <b>Tambah ke Skrin Utama</b> ➕", "Ketuk <b>Tambah</b>. Ikon 25 Rasul akan muncul!"],
+      otherSteps: ["Buka menu pelayar <b>⋮</b> (di penjuru atas).", "Pilih <b>Pasang aplikasi</b> atau <b>Tambah ke skrin utama</b>.", "Ketuk <b>Pasang</b>. Ikon 25 Rasul akan muncul!"]
     },
     en: {
       donate: "Donate", donateTitle: "Support this ebook",
@@ -44,7 +48,11 @@
       namePh: "Write your name", certFor: "This certificate is for", starsGot: "Stars collected", print: "🖨️ Print Certificate",
       again: "↺ Read again", reset: "Reset progress", resetQ: "Clear all stars and start again?",
       endNote: "Remember: always send salawat upon Prophet Muhammad ﷺ and believe in all the messengers. 💚",
-      as: "(peace be upon him)", missing: "📷 QR not uploaded yet."
+      as: "(peace be upon him)", missing: "📷 QR not uploaded yet.",
+      install: "📲 Install App", installTitle: "Add to your home screen",
+      installed: "App installed! 🎉", offline: "Ready to read offline ✅",
+      iosSteps: ["Open this page in <b>Safari</b>.", "Tap the <b>Share</b> button <span aria-hidden=\"true\">⬆️</span> at the bottom or top of the screen.", "Choose <b>Add to Home Screen</b> ➕", "Tap <b>Add</b>. The 25 Rasul icon will appear!"],
+      otherSteps: ["Open the browser menu <b>⋮</b> (top corner).", "Choose <b>Install app</b> or <b>Add to Home screen</b>.", "Tap <b>Install</b>. The 25 Rasul icon will appear!"]
     }
   };
 
@@ -144,11 +152,19 @@
   }
 
   /* ================= pages ================= */
-  function go(n) {
+  function go(n, fromHistory) {
     stopSpeak();
-    S.page = Math.max(0, Math.min(LAST, n)); save("page", S.page);
-    render(); window.scrollTo({ top: 0, behavior: "smooth" });
+    n = Math.max(0, Math.min(LAST, n));
+    if (!fromHistory && n !== S.page) { try { history.pushState({ p: n }, "", "#" + n); } catch (e) {} }
+    S.page = n; save("page", S.page);
+    render(); window.scrollTo({ top: 0, behavior: fromHistory ? "auto" : "smooth" });
   }
+  /* the phone's back button / back swipe turns back a page */
+  window.addEventListener("popstate", function (e) {
+    var p = e.state && typeof e.state.p === "number" ? e.state.p : 0;
+    document.querySelectorAll(".modal").forEach(function (m) { m.hidden = true; });
+    go(p, true);
+  });
 
   function render() {
     var p = S.page, html;
@@ -171,6 +187,7 @@
       '<p>' + t("coverSub") + '</p>' +
       '<button class="btn" data-go="2">' + t("start") + '</button>' +
       '<button class="btn ghost" data-go="1">' + t("toc") + '</button>' +
+      (isApp() ? "" : '<div class="install-btn"><button class="btn ghost" id="btnInstall">' + t("install") + '</button></div>') +
       '<p class="note">' + t("coverNote") + '</p>' +
       '</section>';
   }
@@ -337,7 +354,7 @@
   $("#btnNext").onclick = function () { go(S.page + 1); };
   $("#btnToc").onclick = function () { go(1); };
   document.addEventListener("keydown", function (e) {
-    if (e.target.tagName === "INPUT" || !$("#donateModal").hidden) return;
+    if (e.target.tagName === "INPUT" || $(".modal:not([hidden])")) return;
     if (e.key === "ArrowRight") go(S.page + 1);
     if (e.key === "ArrowLeft") go(S.page - 1);
   });
@@ -355,9 +372,47 @@
   img.onerror = function () { img.hidden = true; $("#qrMissing").hidden = false; };
   img.src = DONATE_QR;
   $("#btnDonate").onclick = function () { modal.hidden = false; $(".close", modal).focus(); };
-  modal.addEventListener("click", function (e) { if (e.target === modal || e.target.closest("[data-close]")) modal.hidden = true; });
-  document.addEventListener("keydown", function (e) { if (e.key === "Escape") modal.hidden = true; });
+  document.querySelectorAll(".modal").forEach(function (m) {
+    m.addEventListener("click", function (e) { if (e.target === m || e.target.closest("[data-close]")) m.hidden = true; });
+  });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") document.querySelectorAll(".modal").forEach(function (m) { m.hidden = true; }); });
+
+  /* ================= install as an app ================= */
+  function isApp() {
+    return (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || window.navigator.standalone === true;
+  }
+  function isIOS() {
+    return /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  }
+  var installPrompt = null;
+  window.addEventListener("beforeinstallprompt", function (e) { e.preventDefault(); installPrompt = e; });
+  window.addEventListener("appinstalled", function () { installPrompt = null; toast(t("installed")); burst(); if (S.page === 0) render(); });
+  document.addEventListener("click", function (e) {
+    if (!e.target.closest("#btnInstall")) return;
+    if (installPrompt) {
+      installPrompt.prompt();
+      installPrompt.userChoice.then(function () { installPrompt = null; });
+      return;
+    }
+    var steps = isIOS() ? t("iosSteps") : t("otherSteps");
+    $("#installSteps").innerHTML = steps.map(function (x) { return "<li>" + x + "</li>"; }).join("");
+    $("#installModal").hidden = false;
+  });
+
+  /* offline: cache the whole book after the first visit */
+  if ("serviceWorker" in navigator && location.protocol !== "file:") {
+    window.addEventListener("load", function () {
+      var first = !navigator.serviceWorker.controller;
+      navigator.serviceWorker.register("sw.js").then(function (reg) {
+        if (first) navigator.serviceWorker.ready.then(function () { if (isApp()) toast(t("offline")); });
+        return reg;
+      }).catch(function () {});
+    });
+  }
 
   if (window.speechSynthesis) speechSynthesis.getVoices();
+  var startHash = parseInt(location.hash.slice(1), 10);
+  if (!isNaN(startHash) && startHash >= 0 && startHash <= LAST) S.page = startHash;
+  try { history.replaceState({ p: S.page }, "", "#" + S.page); } catch (e) {}
   applyPrefs(); updateStars(); render();
 })();

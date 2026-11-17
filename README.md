@@ -9,6 +9,11 @@ A free, interactive web ebook for children under 12, in **Bahasa Melayu** and **
 - **Easy on the eyes**: warm paper colours, a night mode 🌙, three text sizes (Aa), and 🔊 read-aloud using the browser's voice.
 - **No pictures of prophets or people.** Scenes use nature and object emoji only.
 - 💝 **Donation button** that shows your QR code.
+- 📲 **Works like an app**: install it to the home screen with its own icon. It opens full screen, works **offline** after the first visit, and the phone's back button turns back a page.
+
+## 📲 Install on a phone or tablet
+- **Android (Chrome):** tap **📲 Pasang Aplikasi / Install App** on the cover, then tap **Install**.
+- **iPhone / iPad (Safari):** tap **Share ⬆️**, then **Add to Home Screen ➕**. (The Install button on the cover shows these steps.)
 
 ## Sources (authenticity policy)
 Every story is told **only** from:
@@ -31,4 +36,6 @@ Your QR is at **`assets/qr-donation.jpg`**. To change it, replace that file (kee
 ## Edit the stories
 All the text is in `data.js`, one block per rasul, with both `ms` and `en` versions. The interface text is in `app.js` (object `T`).
 
-Files: `index.html`, `style.css`, `app.js`, `data.js`, `assets/`. No build step is needed.
+Files: `index.html`, `style.css`, `app.js`, `data.js`, `manifest.webmanifest` (app name and icons), `sw.js` (offline), `icons/`, `assets/`. No build step is needed.
+
+> **After you change any file**, open `sw.js` and bump `VERSION` (for example `k25r-v1` → `k25r-v2`). This makes installed apps pick up your changes.

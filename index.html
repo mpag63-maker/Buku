@@ -5,8 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Kisah 25 Rasul</title>
   <meta name="description" content="Ebook interaktif percuma untuk kanak-kanak: Kisah 25 Rasul daripada al-Quran dan hadis sahih. Free interactive kids ebook: Stories of the 25 Prophets.">
-  <meta name="theme-color" content="#fff8ec">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
+  <meta name="theme-color" content="#fff8ec" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#262931" media="(prefers-color-scheme: dark)">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="icon" href="icons/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="25 Rasul">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="application-name" content="25 Rasul">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Baloo+2:wght@600;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
@@ -42,6 +51,15 @@
       <img id="qrImg" alt="QR derma / Donation QR" src="assets/qr-donation.jpg">
       <p id="qrMissing" class="qr-missing" hidden>📷 QR belum dimuat naik.<br>Letakkan imej QR anda di <code>assets/qr-donation.jpg</code></p>
       <p class="small" data-t="donateThanks"></p>
+    </div>
+  </div>
+
+  <div id="installModal" class="modal" hidden>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="installTitle">
+      <button class="close" data-close aria-label="Tutup / Close">✕</button>
+      <img src="icons/icon-192.png" alt="" class="app-icon">
+      <h2 id="installTitle" data-t="installTitle"></h2>
+      <ol class="steps" id="installSteps"></ol>
     </div>
   </div>
 
