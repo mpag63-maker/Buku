@@ -2,7 +2,7 @@
   "use strict";
 
   /* ================= SETTINGS — change these ================= */
-  var DONATE_QR = "assets/qr-donation.png"; // replace this image with your own QR
+  var DONATE_QR = "assets/qr-donation.jpg"; // your donation QR image
 
   /* ================= words for the interface ================= */
   var T = {

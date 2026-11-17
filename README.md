@@ -21,7 +21,7 @@ Popular details from weak reports or Isra'iliyyat are left out on purpose, for e
 > Recommended: ask an ustaz or ustazah to review `data.js` before you share the ebook widely.
 
 ## ➕ Add your donation QR
-Save your QR image as **`assets/qr-donation.png`**, replacing the placeholder, then commit. To use another file name, change `DONATE_QR` at the top of `app.js`.
+Your QR is at **`assets/qr-donation.jpg`**. To change it, replace that file (keep the same name). To use another file name, change `DONATE_QR` at the top of `app.js`.
 
 ## 🌐 Publish for free (GitHub Pages)
 1. On GitHub, go to **Settings → Pages**.
