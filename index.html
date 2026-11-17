@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Kisah 25 Rasul</title>
+  <meta name="description" content="Ebook interaktif percuma untuk kanak-kanak: Kisah 25 Rasul daripada al-Quran dan hadis sahih. Free interactive kids ebook: Stories of the 25 Prophets.">
+  <meta name="theme-color" content="#fff8ec">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Baloo+2:wght@600;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <button class="brand" data-go="0" aria-label="Kulit buku / Cover">📖 <span>25 Rasul</span></button>
+    <div class="tools">
+      <button id="btnLang" class="pill" aria-label="Tukar bahasa / Change language">BM</button>
+      <button id="btnFont" class="icon" aria-label="Saiz huruf / Text size">Aa</button>
+      <button id="btnTheme" class="icon" aria-label="Mod malam / Night mode">🌙</button>
+      <span class="starcount" id="starCount" title="Bintang / Stars">⭐ 0</span>
+      <button id="btnDonate" class="donate">💝 <span data-t="donate"></span></button>
+    </div>
+  </header>
+
+  <div class="progress"><div id="progressBar"></div></div>
+
+  <main id="book" tabindex="-1" aria-live="polite"></main>
+
+  <nav class="bottombar">
+    <button id="btnPrev" class="nav" aria-label="Sebelum / Previous">◀</button>
+    <button id="btnToc" class="nav toc" data-t="contents"></button>
+    <button id="btnNext" class="nav" aria-label="Seterusnya / Next">▶</button>
+  </nav>
+
+  <div id="donateModal" class="modal" hidden>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="donateTitle">
+      <button class="close" data-close aria-label="Tutup / Close">✕</button>
+      <h2 id="donateTitle">💝 <span data-t="donateTitle"></span></h2>
+      <p data-t="donateText"></p>
+      <img id="qrImg" alt="QR derma / Donation QR" src="assets/qr-donation.png">
+      <p id="qrMissing" class="qr-missing" hidden>📷 QR belum dimuat naik.<br>Letakkan imej QR anda di <code>assets/qr-donation.png</code></p>
+      <p class="small" data-t="donateThanks"></p>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status"></div>
+  <div id="fx" aria-hidden="true"></div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
