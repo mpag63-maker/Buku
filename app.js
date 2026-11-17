@@ -2,7 +2,9 @@
   "use strict";
 
   /* ================= SETTINGS — change these ================= */
-  var DONATE_QR = "assets/qr-donation.jpg"; // your donation QR image
+  // The donation QR is built into index.html so it always shows (even offline).
+  // To use a different image file instead, put its path here, e.g. "assets/my-qr.png".
+  var DONATE_QR = "";
 
   /* ================= words for the interface ================= */
   var T = {
@@ -181,7 +183,7 @@
 
   function cover() {
     return '<section class="page cover">' +
-      '<div class="big">📖🌙⭐</div>' +
+      '<img class="cover-art" src="icons/icon.svg" alt="" width="180" height="180">' +
       '<div class="arabic">قَصَصُ الأَنْبِيَاء</div>' +
       '<h1>' + (S.lang === "ms" ? "Kisah 25 Rasul" : "Stories of the 25 Messengers") + '</h1>' +
       '<p>' + t("coverSub") + '</p>' +
@@ -369,8 +371,12 @@
 
   /* ================= donation ================= */
   var modal = $("#donateModal"), img = $("#qrImg");
-  img.onerror = function () { img.hidden = true; $("#qrMissing").hidden = false; };
-  img.src = DONATE_QR;
+  var builtInQR = img.getAttribute("src");
+  img.onerror = function () {
+    if (img.src !== builtInQR) { img.src = builtInQR; return; } // file failed: fall back to the built-in QR
+    img.hidden = true; $("#qrMissing").hidden = false;
+  };
+  if (DONATE_QR) img.src = DONATE_QR;
   $("#btnDonate").onclick = function () { modal.hidden = false; $(".close", modal).focus(); };
   document.querySelectorAll(".modal").forEach(function (m) {
     m.addEventListener("click", function (e) { if (e.target === m || e.target.closest("[data-close]")) m.hidden = true; });

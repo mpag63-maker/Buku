@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="30%" r="80%">
+      <stop offset="0" stop-color="#46b88c"/><stop offset="1" stop-color="#23765a"/>
+    </radialGradient>
+    <mask id="moon"><rect width="512" height="512" fill="#fff"/><circle cx="264" cy="90" r="34" fill="#000"/></mask>
+    <clipPath id="tile"><rect width="512" height="512" rx="0"/></clipPath>
+  </defs>
+  <g clip-path="url(#tile)">
+    <rect width="512" height="512" fill="url(#bg)"/>
+    <g transform="translate(256 256) scale(0.94) translate(-256 -256)">
+  <!-- crescent + star -->
+  <circle cx="246" cy="104" r="40" fill="#f6c444" mask="url(#moon)"/>
+  <path fill="#f6c444" d="M300 78 l7.6 15.4 17 2.5 -12.3 12 2.9 16.9 -15.2 -8 -15.2 8 2.9 -16.9 -12.3 -12 17 -2.5z"/>
+
+  <!-- boy: baju melayu -->
+  <path d="M86 512 C86 396 118 350 176 350 C234 350 266 396 266 512Z" fill="#3f86d8"/>
+  <path d="M150 352 L176 384 L202 352" fill="none" stroke="#2c69b3" stroke-width="7" stroke-linejoin="round"/>
+  <rect x="160" y="326" width="32" height="30" rx="8" fill="#e3ad84"/>
+  <!-- boy: head, ears, hair -->
+  <circle cx="110" cy="268" r="15" fill="#e3ad84"/>
+  <circle cx="242" cy="268" r="15" fill="#e3ad84"/>
+  <ellipse cx="176" cy="262" rx="68" ry="72" fill="#f3c7a0"/>
+  <path d="M110 248 C110 216 136 206 176 206 C216 206 242 216 242 248 C226 232 196 228 176 232 C156 228 126 232 110 248Z" fill="#3b2a20"/>
+  <!-- boy: songkok -->
+  <path d="M112 222 L120 170 Q176 158 232 170 L240 222 Q176 208 112 222Z" fill="#1d1d26"/>
+  <path d="M120 170 Q176 158 232 170 Q176 180 120 170Z" fill="#34343f"/>
+  <path d="M132 182 L129 210" stroke="#4a4a57" stroke-width="7" stroke-linecap="round"/>
+  
+  <g>
+    <ellipse cx="152" cy="268" rx="8" ry="10" fill="#3a2a22"/>
+    <ellipse cx="200" cy="268" rx="8" ry="10" fill="#3a2a22"/>
+    <circle cx="155" cy="264" r="3" fill="#fff"/>
+    <circle cx="203" cy="264" r="3" fill="#fff"/>
+    <ellipse cx="138" cy="288" rx="11" ry="7" fill="#f59a9a" opacity=".7"/>
+    <ellipse cx="214" cy="288" rx="11" ry="7" fill="#f59a9a" opacity=".7"/>
+    <path d="M161 290 Q176 306 191 290" stroke="#3a2a22" stroke-width="5" fill="#fff" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- girl: tudung drape (behind face) -->
+  <path d="M338 170 C400 170 430 212 428 272 C426 322 434 348 446 512 L230 512 C242 348 250 322 248 272 C246 212 276 170 338 170Z" fill="#ee7aa6"/>
+  <path d="M268 322 C298 362 378 362 408 322" fill="none" stroke="#d65c8b" stroke-width="7" stroke-linecap="round"/>
+  <!-- girl: face inside tudung with white anak tudung band -->
+  <ellipse cx="338" cy="268" rx="64" ry="70" fill="#ffffff"/>
+  <ellipse cx="338" cy="274" rx="58" ry="62" fill="#f3c7a0"/>
+  <path d="M276 254 Q338 212 400 254 L402 232 Q338 184 274 232Z" fill="#ffffff"/>
+  <!-- tudung top highlight -->
+  <path d="M284 198 Q318 174 354 176" fill="none" stroke="#f7a6c4" stroke-width="9" stroke-linecap="round"/>
+  
+  <g>
+    <ellipse cx="314" cy="274" rx="8" ry="10" fill="#3a2a22"/>
+    <ellipse cx="362" cy="274" rx="8" ry="10" fill="#3a2a22"/>
+    <circle cx="317" cy="270" r="3" fill="#fff"/>
+    <circle cx="365" cy="270" r="3" fill="#fff"/>
+    <ellipse cx="300" cy="294" rx="11" ry="7" fill="#f59a9a" opacity=".7"/>
+    <ellipse cx="376" cy="294" rx="11" ry="7" fill="#f59a9a" opacity=".7"/>
+    <path d="M323 296 Q338 312 353 296" stroke="#3a2a22" stroke-width="5" fill="#fff" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- open book held in front -->
+  <path d="M256 486 C214 462 160 456 112 464 L112 380 C160 372 214 378 256 402 C298 378 352 372 400 380 L400 464 C352 456 298 462 256 486Z" fill="#1c5e47" opacity=".35" transform="translate(0 8)"/>
+  <path d="M256 478 C214 454 160 448 116 456 L116 374 C160 366 214 372 256 396Z" fill="#fff8ec"/>
+  <path d="M256 478 C298 454 352 448 396 456 L396 374 C352 366 298 372 256 396Z" fill="#fdf0d8"/>
+  <g stroke="#e3cfa8" stroke-width="6" stroke-linecap="round" fill="none">
+    <path d="M140 400 C170 396 200 400 228 412"/><path d="M140 424 C170 420 200 424 228 436"/>
+    <path d="M372 400 C342 396 312 400 284 412"/><path d="M372 424 C342 420 312 424 284 436"/>
+  </g>
+  <path d="M256 396 L256 478" stroke="#d9b97c" stroke-width="5"/>
+  <!-- hands on the book -->
+  <ellipse cx="120" cy="420" rx="20" ry="17" fill="#f3c7a0"/>
+  <ellipse cx="392" cy="420" rx="20" ry="17" fill="#f3c7a0"/></g>
+  </g>
+</svg>

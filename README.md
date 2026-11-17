@@ -7,7 +7,7 @@ A free, interactive web ebook for children under 12, in **Bahasa Melayu** and **
 - **Interactive surprises**: 19 pages have an activity (quiz, true/false, a flip card for du'a, tap-to-help games, or putting events in order). Every page also hides a secret ⭐.
 - **Star collection** (44 stars), a contents page that marks pages a child has finished, and a **printable certificate** at the end.
 - **Easy on the eyes**: warm paper colours, a night mode 🌙, three text sizes (Aa), and 🔊 read-aloud using the browser's voice.
-- **No pictures of prophets or people.** Scenes use nature and object emoji only.
+- **No pictures of prophets.** Story scenes use nature and object emoji only. The app icon and cover show a cartoon Muslim boy (songkok) and girl (tudung) reading together.
 - 💝 **Donation button** that shows your QR code.
 - 📲 **Works like an app**: install it to the home screen with its own icon. It opens full screen, works **offline** after the first visit, and the phone's back button turns back a page.
 
@@ -26,7 +26,7 @@ Popular details from weak reports or Isra'iliyyat are left out on purpose, for e
 > Recommended: ask an ustaz or ustazah to review `data.js` before you share the ebook widely.
 
 ## ➕ Add your donation QR
-Your QR is at **`assets/qr-donation.jpg`**. To change it, replace that file (keep the same name). To use another file name, change `DONATE_QR` at the top of `app.js`.
+Your QR is built into `index.html` (a copy is in `assets/qr-donation.png`), so it shows even offline. To use a new QR, upload it to `assets/` and put its path in `DONATE_QR` at the top of `app.js`.
 
 ## 🌐 Publish for free (GitHub Pages)
 1. On GitHub, go to **Settings → Pages**.
@@ -38,4 +38,6 @@ All the text is in `data.js`, one block per rasul, with both `ms` and `en` versi
 
 Files: `index.html`, `style.css`, `app.js`, `data.js`, `manifest.webmanifest` (app name and icons), `sw.js` (offline), `icons/`, `assets/`. No build step is needed.
 
-> **After you change any file**, open `sw.js` and bump `VERSION` (for example `k25r-v1` → `k25r-v2`). This makes installed apps pick up your changes.
+> Installed apps pick up page and story changes automatically when online. If you change an **image or icon**, also bump `VERSION` in `sw.js` (for example `k25r-v2` → `k25r-v3`).
+>
+> On phones that installed the old version, the home-screen icon may only update after removing the app and adding it again (iPhone always needs this).
